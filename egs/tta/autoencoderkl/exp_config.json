@@ -1,0 +1,97 @@
+{
+  "base_config": "egs/tta/autoencoderkl/exp_config_base.json",
+  "dataset": [
+    "audioset",
+    "AudioCaps",
+    "BBC",
+    "FreeSound",
+    "SoundBible"
+  ],
+  "dataset_path": "",
+  "preprocess": {
+    // Specify the output root path to save the processed data 
+    "processed_dir": "/work/gwh/Amphion/processed_data/tta",
+    // feature
+    "use_spk": false,
+    "use_spkid": false,
+    "use_uv": false,
+    "use_frame_pitch": false,
+    "use_phone_pitch": false,
+    "use_frame_energy": false,
+    "use_phone_energy": false,
+    "use_mel": false,
+    "use_audio": false,
+    "use_label": false,
+    "use_one_hot": false,
+    // feature for text to audio
+    "use_caption": true,
+    "use_melspec": true,
+    "use_wav": false,
+    // feature dir
+    "melspec_dir": "mels",
+    "wav_dir": "wavs",
+    // mel features
+    "n_mel": 64,
+    "win_size": 1024,
+    "hop_size": 160, // 24000/120*10=2000frames 2000
+    "sample_rate": 16000,
+    "n_fft": 1024,
+    "fmin": 0,
+    "fmax": 8000,
+    "filter_length": 1024,
+    "target_length": 1024, //10.24*16000/160=1024
+    "duration": 10.24
+  },
+  // Specify the output root path to save model ckpts and logs
+  "root_dir": "",
+  "checkpoint_dir": "ckpts/tta/autoencoder",
+  "checkpoint_file": "",
+  "test_out_dir": "test_results",
+  "num_workers": 16,
+  "seed": 1234,
+  "warmup_steps": 5000,
+  "gamma": 0.95,
+  //resume
+  "resume": "",
+  //infer
+  "infer": false,
+  // train
+  "train": {
+    "accelerator": "cuda",
+    "devices": [
+      1,
+      2
+    ],
+    "strategy": "auto",
+    "precision": "16-mixed",
+    "out_dir": "ckpts/tta/autoencoder",
+    "batch_size": 16,
+    "epochs": 8,
+    "steps": "", // 1000000
+    "project": "AutoencoderKL",
+    "task_type": "tta",
+    "gradient_accumulation_steps": 1,
+    "exponential_lr": {
+      "lr_decay": 0.999
+    },
+    "adam": {
+      "lr": 1.0e-5,
+      "betas": [
+        0.5,
+        0.9
+      ],
+      "weight_decay": 0,
+      "eps": 1.0e-8
+    },
+  },
+  "logger": {
+    "logger_name": [
+      "csv",
+      "tensorboard"
+    ],
+    "log_interval": 10,
+    "log_per_epoch": "",
+    "checkpoint_frequency": 1,
+    "num_checkpoint_keep": 4
+  }
+}

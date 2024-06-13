@@ -1,0 +1,62 @@
+{
+  "base_config": "config/base.json",
+  "model_type": "AutoencoderKL",
+  "task_type": "tta",
+  "dataset": [
+    "AudioCaps"
+  ],
+  "preprocess": {
+    // feature used for model training
+    "use_spkid": false,
+    "use_uv": false,
+    "use_frame_pitch": false,
+    "use_phone_pitch": false,
+    "use_frame_energy": false,
+    "use_phone_energy": false,
+    "use_mel": false,
+    "use_audio": false,
+    "use_label": false,
+    "use_one_hot": false,
+    // Settings for data preprocessing
+    "n_mel": 64,
+    "win_size": 1024,
+    "hop_size": 160,
+    "sample_rate": 16000,
+    "n_fft": 1024,
+    "fmin": 0,
+    "fmax": 8000,
+    // "bits": 8
+  },
+  // model
+  "model": {
+    "autoencoderkl": {
+      "ch": 128,
+      "ch_mult": [
+        1,
+        2,
+        4
+      ],
+      "num_res_blocks": 2,
+      "in_channels": 1,
+      "z_channels": 8,
+      "out_ch": 1,
+      "double_z": true
+    },
+    "loss": {
+      "kl_weight": 1e-8,
+      "disc_weight": 0.5,
+      "disc_factor": 1.0,
+      "logvar_init": 0.0,
+      "disc_start": 20001,
+      "disc_in_channels": 1,
+      "disc_num_layers": 3,
+      "use_actnorm": false
+    }
+  },
+  // train
+  "train": {
+    "adam": {
+      "lr": 4.0e-5
+    }
+  }
+}
