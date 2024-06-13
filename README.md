@@ -1,5 +1,5 @@
 # LAFMA
-Official implementation of the paper "LAFMA: A Latent Flow Matching Model for Text-to-Audio Generation" (INTERSPEECH 2024).  [Paper Link](https://arxiv.org) and [Demo Page](https://lafma.github.io) .
+Official implementation of the paper "LAFMA: A Latent Flow Matching Model for Text-to-Audio Generation" (INTERSPEECH 2024).  [Paper Link](https://arxiv.org/pdf/2406.08203.pdf) and [Demo Page](https://lafma.github.io) .
 
 ![](imgs/lafma.png)
 
